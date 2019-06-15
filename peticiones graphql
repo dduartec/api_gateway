@@ -1,0 +1,168 @@
+
+
+//UPLOAD
+//el header es Content-Type: multipart/form-data
+curl localhost:5000/graphql   -F operations='{ "query": "mutation($uploads: [Upload!]!){\n  uploadFiles(files:{\n    uploads:$uploads\n    name: \"graphql\"\n    description:\"prueba gql\"\n    owner: \"diegun\"\n  },input:{email:\"unemail2@gmail.com\"\n token: \"QnIcrnWpvU\"})\n  {\n    name\n description\n owner\n path\n advise\n  }\n}\n", "variables": { "uploads": [null] } }'   -F map='{ "0": ["variables.uploads.0"] }'   -F 0=@/home/diego/Imágenes/test.png
+
+var files=[fs.createReadStream('/home/diego/Imágenes/test.png')]
+    var options = {
+      method: 'POST',
+      url: 'http://localhost:5000/graphql',
+      headers:
+        { 'Content-Type': 'multipart/form-data' },
+      formData:
+      {
+        operations: '{ "query": "mutation($uploads: [Upload!]!){\\n  uploadFiles(files:{\\n    uploads:$uploads\\n    name: \\"graphql\\"\\n    description:\\"prueba gql\\"\\n    owner: \\"diegun\\"\\n  },input:{email:\\"unemail2@gmail.com\\"\\n token: \\"QnIcrnWpvU\\"})\\n  {\\n    name\\n description\\n owner\\n path\\n advise\\n  }\\n}\\n", "variables": { "uploads": '+ files+'} }'
+      }
+    };
+
+//USER
+mutation{
+  createUser(user:{
+    name:"prueba"
+    email: "a@gmail.com"
+    password: "asdfg"
+  }){
+    advise
+    id
+    token
+    error
+  }
+}
+
+mutation{
+  deleteUser(user:{
+    email:"a@gmail.com"
+  }){
+    advise
+  }
+}
+mutation{
+  updateUser(user:{
+    id: 3
+    new_name: "prueba put"
+  }){
+    advise
+  }
+}
+
+mutation{
+  userSession(user:{
+    email:"unemail2@gmail.com"
+    password: "123456789"
+  }){
+    advise
+    token
+  }
+}
+
+//ORGANIZATION
+mutation{
+  createFolder(create:{
+    owner: "prueba"
+    path: "/SharedStorage/graphql"
+  },input:{
+    email: "unemail2@gmail.com"
+    token: "EYHMdIzqoL"
+  }){
+    create_id
+    owner
+    path
+    date
+    advise
+  }
+}
+
+mutation{
+  moveFile(move:{
+    owner:"prueba"
+    #origen, incluyendo el archivo (graphql en este caso)
+    origin:"/SharedStorage/graphql1/graphql"
+    #destino, incluyendo el archivo (graphql en este caso)
+    destiny:"/SharedStorage/graphql"
+    
+  },input:{
+    email: "unemail2@gmail.com"
+    token: "RkySFVXsGc"
+  })
+  {
+    move_id
+    owner
+    origin
+    destiny
+    date
+    advise
+  }
+}
+
+mutation{
+  deleteFile(del:{
+    owner: "prueba"
+    path: "/SharedStorage/graphql"
+  },input:{
+    email: "unemail2@gmail.com"
+    token: "RkySFVXsGc"
+  }){
+    del_id
+    owner
+    path
+    date
+    advise
+  }
+}
+//DOWNLOAD
+mutation{
+  downloadFile(file:{
+    path: "/SharedStorage/Malla_curricular_arquitectura.pdf"
+  },input:{
+    email:"qwer@gmail.com",
+    token:"LyXgDGOCnK"    
+  })
+  {
+    base64
+    name
+  }
+}
+// CARPETAS DE UN USUARIO
+mutation{
+  downloadList(owner:{
+    owner:"sergio"
+  },input:{
+    email:"qwer@gmail.com",
+    token:"LyXgDGOCnK"   
+  }){   
+    name
+    owner
+    path
+    ...filesRecursive
+  }
+}
+fragment filesRecursive on File {
+  files{
+  	...fileFields
+    files{
+    	...fileFields
+      files{
+        ...fileFields
+      	files{
+        	...fileFields
+      		files{
+        		...fileFields
+      		}
+      	}
+      }
+    }
+  }
+}
+
+fragment fileFields on File {
+  name
+  owner
+  path
+}
+fdasfas
+fdsaas
+
+
+
+

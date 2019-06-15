@@ -1,0 +1,18 @@
+version: '2.1'
+services:
+  api-gateway:
+    build: .
+    environment:
+      PORT: '5000'
+      SHOW_URLS: 'true'
+      URL: '192.168.99.101'
+      ORG_PORT: '8000'
+      ORG_ENTRY: 'organization-ms'
+      DOWNLOAD_PORT: '8005'
+      DOWNLOAD_ENTRY: 'api/v1'
+      UPLOAD_PORT: '3000'
+      UPLOAD_ENTRY: '/posts'
+      AUTH_PORT: '5005'
+      AUTH_ENTRY: ''
+    ports:
+      - '5000:5000'
