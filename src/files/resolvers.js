@@ -188,6 +188,7 @@ const resolvers = {
 	Mutation: {
 		//ORGANIZATION
 		async createFolder(obj, { create, input }) {
+			console.log("debugggggg")
 			const token = JSON.parse(await validate(input))
 			console.log(token.advise)
 			if (token.advise != "Token accepted") {
