@@ -10,7 +10,7 @@ import request from 'request'
 
 import { generalRequest, getRequest } from '../utilities';
 import {
-	url,
+	org_url,
 	org_port,
 	org_entryPoint,
 	download_port,
@@ -18,12 +18,15 @@ import {
 	auth_port,
 	auth_entryPoint,
 	upload_port,
-	upload_entryPoint
+	upload_entryPoint,
+	auth_url,
+	upload_url,
+	download_url
 } from './server';
-const org_URL = `http://${url}:${org_port}/${org_entryPoint}`;
-const download_URL = `http://${url}:${download_port}/${download_entryPoint}`;
-const upload_URL = `http://${url}:${upload_port}/${upload_entryPoint}`;
-const auth_URL = `http://${url}:${auth_port}`;;
+const org_URL = `http://${org_url}:${org_port}/${org_entryPoint}`;
+const download_URL = `http://${download_url}:${download_port}/${download_entryPoint}`;
+const upload_URL = `http://${upload_url}:${upload_port}/${upload_entryPoint}`;
+const auth_URL = `http://${auth_url}:${auth_port}`;;
 
 const UPLOAD_DIR = './uploads'
 
