@@ -110,7 +110,8 @@ const validate = (input) => {
 		{
 			'Content-Type': 'application/json',
 			'email': String(input.email),
-			'token': String(input.token)
+			'token': String(input.token),
+			'mobile':String(input.mobile)
 
 		}
 	};

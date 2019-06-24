@@ -4,6 +4,7 @@ input UserInput {
     name:String!
     email:String!
     password:String!
+    mobile: Boolean
 }
 type UserPostOut{
     advise: String
@@ -27,6 +28,7 @@ type UserPutOut{
 input SessionInput{
     email:String!
     password:String!
+    mobile: Boolean
 }
 type SessionOut{
     advise:String
@@ -36,7 +38,8 @@ type SessionOut{
 }
 input TokenInput{
     email:String!
-    token:String!    
+    token:String!
+    mobile: Boolean
 }
 
 `;
