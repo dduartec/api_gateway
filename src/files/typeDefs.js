@@ -195,5 +195,5 @@ type Data {
 `;
 
 export const soapMutations = `
-    suapConsume(soap: soapInput!): soapOut!
+    suapConsume(soap: SoapInput!): SoapOut!
 `;
