@@ -171,3 +171,29 @@ input UploadInput {
 export const uploadMutations = `
     uploadFiles(files: UploadInput!,input:TokenInput!): UploadOut!
 `;
+
+//soap
+
+export const soapTypeDef = `
+
+input SoapInput {
+    username: String!
+}
+type Data {
+    id: Int
+    image: String
+    image_base64:String
+    id_user:String
+    createdAt: String
+    updatedAt: String
+  }
+
+  type SoapOut {
+    data: [Data]
+  }
+
+`;
+
+export const soapMutations = `
+    suapConsume(soap: soapInput!): soapOut!
+`;

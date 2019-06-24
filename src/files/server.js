@@ -10,3 +10,6 @@ export const upload_entryPoint = process.env.UPLOAD_ENTRY
 export const auth_url = process.env.AUTH_URL
 export const auth_port = process.env.AUTH_PORT
 export const auth_entryPoint = process.env.AUTH_ENTRY
+export const soap_url = process.env.SOAP_URL
+export const soap_port = process.env.SOAP_PORT
+export const soap_entryPoint = process.env.SOAP_ENTRY

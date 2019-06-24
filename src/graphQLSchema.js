@@ -16,6 +16,8 @@ import {
 	usersTypeDef,
 	userMutations,
 	downloadMutations,
+	soapTypeDef,
+	soapMutations,
 } from './files/typeDefs';
 
 import resolvers from './files/resolvers';
@@ -27,7 +29,8 @@ const mergedTypeDefs = mergeSchemas(
 		organizationTypeDef,
 		downloadTypeDef,
 		uploadTypeDef,
-		usersTypeDef
+		usersTypeDef,
+		soapTypeDef
 	],
 	[
 		organizationQueries,
@@ -37,7 +40,8 @@ const mergedTypeDefs = mergeSchemas(
 		organizationMutations,
 		uploadMutations,
 		userMutations,
-		downloadMutations
+		downloadMutations,
+		soapMutations
 	]
 );
 

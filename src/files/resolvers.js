@@ -26,7 +26,8 @@ import {
 const org_URL = `http://${org_url}:${org_port}/${org_entryPoint}`;
 const download_URL = `http://${download_url}:${download_port}/${download_entryPoint}`;
 const upload_URL = `http://${upload_url}:${upload_port}/${upload_entryPoint}`;
-const auth_URL = `http://${auth_url}:${auth_port}`;;
+const auth_URL = `http://${auth_url}:${auth_port}`;
+const soap_URL = `http://${soap_url}:${soap_port}`;;
 
 const UPLOAD_DIR = './uploads'
 
@@ -285,6 +286,9 @@ const resolvers = {
 			generalRequest(auth_URL + "/Users", 'DELETE', user),
 		async userSession(obj, { user }) {
 			return await generalRequest(auth_URL + "/Session", 'POST', user)
+		},
+		async soapConsume(obj, { soap }) {
+			return await generalRequest(soap_URL + "/soaps/cons_response", 'POST', soap)
 		}
 		/*userSession: (_, { user }) => {
 			console.log(await generalRequest(auth_URL + "/Session", 'POST', user))
