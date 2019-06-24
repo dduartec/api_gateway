@@ -46,6 +46,9 @@ input LogoutInput{
     email:String!
     mobil: String
 }
+type LogoutOut{
+    advise:String
+}
 
 `;
 export const userMutations = `
@@ -53,7 +56,7 @@ export const userMutations = `
     updateUser(user: UserPutIn!):UserPutOut!
     deleteUser(user: UserDelIn!):UserPutOut!
     userSession(user: SessionInput!):SessionOut!
-    logOut(user: LogoutInput!)
+    logOut(user: LogoutInput!):LogoutOut!
 `;
 
 //ORGANIZATION
