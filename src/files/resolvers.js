@@ -21,7 +21,9 @@ import {
 	upload_entryPoint,
 	auth_url,
 	upload_url,
-	download_url
+	download_url,
+	soap_url,
+	soap_port
 } from './server';
 const org_URL = `http://${org_url}:${org_port}/${org_entryPoint}`;
 const download_URL = `http://${download_url}:${download_port}/${download_entryPoint}`;
