@@ -289,6 +289,9 @@ const resolvers = {
 		async userSession(obj, { user }) {
 			return await generalRequest(auth_URL + "/Session", 'POST', user)
 		},
+		async logOut(obj, { user }) {
+			return await generalRequest(auth_URL + "/Session", 'DELETE', user)
+		},
 		async soapConsume(obj, { soap }) {
 			return await generalRequest(soap_URL + "/soaps/cons_response", 'POST', soap)
 		}

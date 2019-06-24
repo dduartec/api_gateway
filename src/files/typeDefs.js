@@ -4,7 +4,7 @@ input UserInput {
     name:String!
     email:String!
     password:String!
-    mobile: Boolean
+    mobil: String
 }
 type UserPostOut{
     advise: String
@@ -28,7 +28,7 @@ type UserPutOut{
 input SessionInput{
     email:String!
     password:String!
-    mobile: Boolean
+    mobil: String
 }
 type SessionOut{
     advise:String
@@ -39,7 +39,12 @@ type SessionOut{
 input TokenInput{
     email:String!
     token:String!
-    mobile: Boolean
+    mobil: String
+}
+
+input LogoutInput{
+    email:String!
+    mobil: String
 }
 
 `;
@@ -48,6 +53,7 @@ export const userMutations = `
     updateUser(user: UserPutIn!):UserPutOut!
     deleteUser(user: UserDelIn!):UserPutOut!
     userSession(user: SessionInput!):SessionOut!
+    logOut(user: LogoutInput!)
 `;
 
 //ORGANIZATION
@@ -195,5 +201,5 @@ type Data {
 `;
 
 export const soapMutations = `
-    suapConsume(soap: SoapInput!): SoapOut!
+    soapConsume(soap: SoapInput!): SoapOut!
 `;
