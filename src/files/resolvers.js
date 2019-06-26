@@ -23,13 +23,16 @@ import {
 	upload_url,
 	download_url,
 	soap_url,
-	soap_port
+	soap_port,
+	controller_url,
+	controller_port
 } from './server';
 const org_URL = `http://${org_url}:${org_port}/${org_entryPoint}`;
 const download_URL = `http://${download_url}:${download_port}/${download_entryPoint}`;
 const upload_URL = `http://${upload_url}:${upload_port}/${upload_entryPoint}`;
 const auth_URL = `http://${auth_url}:${auth_port}`;
-const soap_URL = `http://${soap_url}:${soap_port}`;;
+const soap_URL = `http://${soap_url}:${soap_port}`;
+const controller_URL = `http://${controller_url}:${controller_port}`;
 
 const UPLOAD_DIR = './uploads'
 
@@ -114,7 +117,7 @@ const validate = (input) => {
 			'Content-Type': 'application/json',
 			'email': String(input.email),
 			'token': String(input.token),
-			'mobil':String(input.mobil)
+			'mobil': String(input.mobil)
 
 		}
 	};
@@ -136,14 +139,14 @@ function folder(json, owner) {
 	var files = []
 	for (let key in json) {
 		var temp = {}
-		if(key==="path" || key ==="description" || key==="owner"){
+		if (key === "path" || key === "description" || key === "owner") {
 			break;
 		}
 		temp['name'] = key
 		temp['owner'] = owner
 		temp['path'] = json[key].path
-		temp['files'] =[]
-		if (json[key]!=null && !(typeof json[key] === 'string' || json[key] instanceof String)) {
+		temp['files'] = []
+		if (json[key] != null && !(typeof json[key] === 'string' || json[key] instanceof String)) {
 			//console.log(json[key])
 			temp['files'] = folder(json[key], owner)
 		}
@@ -209,7 +212,7 @@ const resolvers = {
 			if (token.advise != "Token accepted") {
 				return token
 			}
-			var res= await generalRequest(`${org_URL}` + "/folder", 'PUT', move)
+			var res = await generalRequest(`${org_URL}` + "/folder", 'PUT', move)
 			console.log(res)
 			return res
 		},
@@ -268,18 +271,18 @@ const resolvers = {
 			return res
 		},
 		//AUTH
-		async createUser (_, { user }) {
-			var res=await generalRequest(auth_URL + "/Users", 'POST', user)
+		async createUser(_, { user }) {
+			var res = await generalRequest(auth_URL + "/Users", 'POST', user)
 			console.log(res)
-			if(res.error){
+			if (res.error) {
 				return res
 			}
-			const create={
-				owner:user.name,
-				path:"/SharedStorage/"+user.name
+			const create = {
+				owner: user.name,
+				path: "/SharedStorage/" + user.name
 			}
 			console.log(create)
-			var xd = generalRequest(`${org_URL}` + "/folder", 'POST', create)	
+			var xd = generalRequest(`${org_URL}` + "/folder", 'POST', create)
 			return res
 		},
 		updateUser: (_, { user }) =>
@@ -287,7 +290,16 @@ const resolvers = {
 		deleteUser: (_, { user }) =>
 			generalRequest(auth_URL + "/Users", 'DELETE', user),
 		async userSession(obj, { user }) {
-			return await generalRequest(auth_URL + "/Session", 'POST', user)
+
+			const res = await generalRequest(auth_URL + "/Session", 'POST', user)
+			if (res.email) {
+				const messaging = {
+					messagingToken: user.messaging,
+					email: res.email
+				}
+				generalRequest(controller_URL + "/regUserMessagingToken", 'POST', messaging)
+			}
+			return res;
 		},
 		async logOut(obj, { user }) {
 			return await generalRequest(auth_URL + "/Session", 'DELETE', user)

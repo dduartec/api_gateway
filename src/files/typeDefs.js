@@ -28,7 +28,8 @@ type UserPutOut{
 input SessionInput{
     email:String!
     password:String!
-    mobil: String
+    mobil: String!
+    messaging: String!
 }
 type SessionOut{
     advise:String
@@ -39,12 +40,12 @@ type SessionOut{
 input TokenInput{
     email:String!
     token:String!
-    mobil: String
+    mobil: String!
 }
 
 input LogoutInput{
     email:String!
-    mobil: String
+    mobil: String!
 }
 type LogoutOut{
     advise:String

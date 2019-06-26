@@ -13,3 +13,5 @@ export const auth_entryPoint = process.env.AUTH_ENTRY
 export const soap_url = process.env.SOAP_URL
 export const soap_port = process.env.SOAP_PORT
 export const soap_entryPoint = process.env.SOAP_ENTRY
+export const controller_url = process.env.CONTROLLER_URL
+export const controller_port = process.env.CONTROLLER_PORT
