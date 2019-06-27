@@ -292,10 +292,10 @@ const resolvers = {
 		async userSession(obj, { user }) {
 
 			const res = await generalRequest(auth_URL + "/Session", 'POST', user)
-			if (res.email) {
+			if (res.name) {
 				const messaging = {
 					messagingToken: user.messaging,
-					email: res.email
+					username: res.name
 				}
 				generalRequest(controller_URL + "/regUserMessagingToken", 'POST', messaging)
 			}
